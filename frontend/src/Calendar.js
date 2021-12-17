@@ -4,7 +4,10 @@ import {GoogleLogin} from 'react-google-login'
 import axios from 'axios'
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Card, Alert, Navbar, Nav, Container } from "react-bootstrap";
+// import { Card, Alert, Navbar, Nav, Container } from "react-bootstrap";
+import { Card, Button, Alert, Navbar, Nav, Container } from "react-bootstrap";
+import { useAuth } from "./contexts/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
 
 
 // import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -12,6 +15,8 @@ import { Card, Alert, Navbar, Nav, Container } from "react-bootstrap";
 // import Notes from './Notes';
 // import Events from './Events';
 // import HomePage from './HomePage';
+
+
 
 
 function Calendar() {
@@ -56,36 +61,27 @@ function Calendar() {
 
   return (
     <div>
-      <div className="Calendar">
-        {/* <h1>Navigation Bar</h1> */}
-        {/* <Navbar
+      <Navbar
         bg="dark"
         variant="dark"
         sticky="top"
         expand="lg"
         collapseOnSelect
-        className="ml-auto px-3">
-          <Navbar.Brand>Comp484</Navbar.Brand>
-            <Navbar.Toggle />
-              <Navbar.Collapse>
-                <Nav className="ms-auto">
-                  <Nav.Link href="/">Home</Nav.Link>
-                  <Nav.Link href="#">My Events</Nav.Link>
-                  <Nav.Link href="#">My Calendar</Nav.Link>
-                  <Nav.Link href="#">Reminders</Nav.Link>
-                  <Nav.Link href="/notes">Notes</Nav.Link>
-                  {/* <button
-                    variant="link"
-                    className="btn btn-outline-success my-2 my-sm-0"
-                    type="button"
-                    onClick={handleLogout}
-                  >
-                    Log Out
-                  </button> */}
-                {/* </Nav>
-              </Navbar.Collapse>
-            </Navbar> End of Navbar */} */}
-      </div>
+        className="ml-auto px-3"
+        
+      >
+        <Navbar.Brand>Comp484</Navbar.Brand>
+        <Navbar.Toggle />
+          <Navbar.Collapse>
+            <Nav className="ms-auto">
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="#">My Events</Nav.Link>
+              <Nav.Link href="/calendar">My Calendar</Nav.Link>
+              <Nav.Link href="#">Reminders</Nav.Link>
+              <Nav.Link href="/notes">Notes</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+      </Navbar>
       {
         !signedIn ? (      //Google sign in
           <div>
