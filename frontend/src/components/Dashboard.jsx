@@ -38,7 +38,7 @@ export default function Dashboard() {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/events">My Events</Nav.Link>
             <Nav.Link href="/calendar">My Calendar</Nav.Link>
-            <Nav.Link href="#">Reminders</Nav.Link>
+            <Nav.Link href="/productivity">Productivity</Nav.Link>
             <Nav.Link href="/notes">Notes</Nav.Link>
             <button
               variant="link"

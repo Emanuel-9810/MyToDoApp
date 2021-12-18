@@ -17,6 +17,7 @@ import Notes from './components/Notes';
 import Login from './components/Login';
 import Calendar from './Calendar';
 import Events from './components/Events';
+import Productivity from './components/Productivity';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
               <Route path="/notes" element={<Notes />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/events" element={<Events/>}/>
+              <Route path="/productivity" element={<Productivity/>}/>
             </Routes>
           </AuthProvider>
         </Router>

@@ -42,3 +42,16 @@
     transform: rotate(360deg);
   }
 }
+
+form {
+  padding-top: 20px;
+  text-align: center;
+}
+
+/* ul{
+  background-color: violet;
+}
+
+li{
+  background-color: aquamarine;
+} */
