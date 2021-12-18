@@ -36,7 +36,7 @@ export default function Dashboard() {
         <Navbar.Collapse>
           <Nav className="ms-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="#">My Events</Nav.Link>
+            <Nav.Link href="/events">My Events</Nav.Link>
             <Nav.Link href="/calendar">My Calendar</Nav.Link>
             <Nav.Link href="#">Reminders</Nav.Link>
             <Nav.Link href="/notes">Notes</Nav.Link>
