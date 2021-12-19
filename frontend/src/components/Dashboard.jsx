@@ -3,11 +3,23 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, Button, Alert, Navbar, Nav, Container } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import Box from "@mui/material/Box";
+
+
+
 
 export default function Dashboard() {
   const [error, setError] = useState(null);
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
+
+  var boxStyle = {
+    padding: 8,
+    height: "92vh",
+    background: "#96C1F2",
+    display: "flex",
+    flexDirection: "column"
+  };
 
   async function handleLogout() {
     setError("");
@@ -52,6 +64,7 @@ export default function Dashboard() {
         </Navbar.Collapse>
       </Navbar>
 
+      <Box style={boxStyle}>
       <div
         className="d-flex align-items-center justify-content-center"
         style={{ minHeight: "100vh" }}
@@ -63,12 +76,15 @@ export default function Dashboard() {
               {error && <Alert variant="danger">{error}</Alert>}
               <strong>Email: </strong> {currentUser.email}
               <Link to="/update-profile" className="btn btn-success w-100 mt-3">
-                Update Profile
+                Update Email
               </Link>
             </Card.Body>
           </Card>
         </div>
       </div>
+      </Box>
+
+      
     </>
   );
 }

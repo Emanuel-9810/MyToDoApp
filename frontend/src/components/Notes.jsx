@@ -8,8 +8,26 @@ import firebase from "firebase/compat/app";
 import "../contexts/Notes.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import Box from "@mui/material/Box";
+
 
 function Notes() {
+
+  var boxStyle = {
+    padding: 8,
+    height: "92vh",
+    background: "#96C1F2",
+    display: "flex",
+    flexDirection: "column"
+  };
+
+  var listStyle = {
+    margin: 5,
+    display: "flex",
+    flex: 1,
+    background: "#C5C1C0"
+  };
+
   const [error, setError] = useState(null);
   const { currentUser, logout } = useAuth();
   const [todos, setTodos] = useState([]);
@@ -85,6 +103,7 @@ function Notes() {
         </Navbar.Collapse>
       </Navbar>
       
+      <Box style={boxStyle}>
       <div className="notes">
         <h1>Notes React-Firebase</h1>
         <form>
@@ -116,6 +135,7 @@ function Notes() {
                   
         </ul>
       </div>
+      </Box>
     </>
   );
 }

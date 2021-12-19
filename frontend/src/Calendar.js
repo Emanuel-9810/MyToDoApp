@@ -8,18 +8,17 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Card, Button, Alert, Navbar, Nav, Container } from "react-bootstrap";
 import { useAuth } from "./contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-
-
-// import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-// import Reminders from './Reminders';
-// import Notes from './Notes';
-// import Events from './Events';
-// import HomePage from './HomePage';
-
-
-
+import Box from "@mui/material/Box";
 
 function Calendar() {
+
+  var boxStyle = {
+    padding: 8,
+    height: "92vh",
+    background: "#96C1F2",
+    display: "flex",
+    flexDirection: "column"
+  };
 
   const responseGoogle = (res) =>{
     console.log(res)
@@ -82,6 +81,8 @@ function Calendar() {
             </Nav>
           </Navbar.Collapse>
       </Navbar>
+      <Box style={boxStyle}>
+
       {
         !signedIn ? (      //Google sign in
           <div>
@@ -98,7 +99,7 @@ function Calendar() {
           </div>):(//Event form
       <div>
         <form onSubmit={handleSubmit}>
-          <label htmlFor='summary'>Summary</label><br></br>
+          <label htmlFor='summary'>Title</label><br></br>
           <input type="text" id="summary" value={summary} onChange={e=>
             setSummary(e.target.value)
           }/><br></br>
@@ -127,6 +128,8 @@ function Calendar() {
         </form>
       </div>) 
       }
+      </Box>
+      
     </div> /*End of parent div*/
   );
 }
