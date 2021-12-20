@@ -69,7 +69,7 @@ function Productivity() {
   var boxStyle = {
     padding: 8,
     height: "92vh",
-    background: "#96C1F2",
+    background: "#c3b59f",
     display: "flex",
     flexDirection: "column"
   };
