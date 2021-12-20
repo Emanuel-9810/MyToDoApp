@@ -24,7 +24,7 @@ const NotesContext = ({ arr }) => {
     <List className="todo__list">
       <ListItem style={listStyle}>
         <ListItemAvatar />
-        <ListItemText primary={arr.item.todo} secondary={arr.item.todo} />
+        <ListItemText primary={arr.item.title} secondary={arr.item.note} />
       </ListItem>
       <DeleteForeverIcon
         onClick={() => {

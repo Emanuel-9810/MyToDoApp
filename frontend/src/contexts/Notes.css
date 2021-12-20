@@ -1,3 +1,10 @@
+.title {
+  margin-bottom: 100px !important;
+}
+.note {
+  margin-top: 50px !important;
+}
+
 .todo__list {
     display: flex;
     justify-content: center;
