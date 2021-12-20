@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, Alert, Navbar, Nav, Container } from "react-bootstrap";
-import { Button, FormControl, Input, InputLabel } from "@material-ui/core";
+import { Button, FormControl, Input, InputLabel } from "@material-ui/core"; //Creates Display
 import NotesContext from "../contexts/NotesContext";
-import { db } from "../firebase";
+import { db } from "../firebase"; //imported Database
 import firebase from "firebase/compat/app";
 import "../contexts/Notes.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import Box from "@mui/material/Box";
-
+import { Box } from "@material-ui/core";
 
 function Notes() {
 
@@ -21,43 +21,42 @@ function Notes() {
     flexDirection: "column"
   };
 
-  var listStyle = {
-    margin: 5,
-    display: "flex",
-    flex: 1,
-    background: "#C5C1C0"
-  };
-
-  const [error, setError] = useState(null);
-  const { currentUser, logout } = useAuth();
-  const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState("");
+  const [error, setError] = useState(null); //ignore
+  const { currentUser, logout } = useAuth(); //Gives current user using useAuth
+  const [todos, setTodos] = useState([]); 
+  const [titleInput, setTitleIn] = useState("");
+  const [noteInput, setNoteIn] = useState("");
+  
+  //Loads previous notes that user created
   useEffect(() => {
-    db.collection(currentUser.email)                    //try to input currentUser for collection("todos") => collection(currentUser)
+    db.collection(currentUser.email) //try to input currentUser for collection("todos") => collection(currentUser)
       .orderBy("timestamp", "desc")
       .onSnapshot(snapshot => {
-        setTodos(
+      setTodos(
           snapshot.docs.map(doc => ({
             id: doc.id,
             item: doc.data()
           }))
         );
       });
-  }, [input]);
-  
+  }, [titleInput, noteInput]);
+
   console.log(currentUser.email);
 
+  //Creates and sends note to DB based on email
   const addTodo = e => {
     e.preventDefault();
-    db.collection(currentUser.email).add({ //changed from "todos" to currentUser
-      todo: input,
+    db.collection(currentUser.email).add({
+      title: titleInput,
+      note: noteInput,
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     });
-    setInput("");
+    setTitleIn("");
+    setNoteIn("");
   };
 
   console.log(todos);
-  
+
   const navigate = useNavigate();
 
   async function handleLogout() {
@@ -80,16 +79,15 @@ function Notes() {
         expand="lg"
         collapseOnSelect
         className="ml-auto px-3"
-        
       >
         <Navbar.Brand>Comp484</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav className="ms-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/events">My Events</Nav.Link>
-            <Nav.Link href="/calendar">My Calendar</Nav.Link>
-            <Nav.Link href="/productivity">Productivity</Nav.Link>
+            <Nav.Link href="#">My Events</Nav.Link>
+            <Nav.Link href="#">My Calendar</Nav.Link>
+            <Nav.Link href="#">Reminders</Nav.Link>
             <Nav.Link href="/notes">Notes</Nav.Link>
             <button
               variant="link"
@@ -102,31 +100,50 @@ function Notes() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      
+
       <Box style={boxStyle}>
       <div className="notes">
-        <h1>Notes React-Firebase</h1>
+        <h1>Create New Note</h1>
         <form>
-                      
-          <FormControl>
-                           <InputLabel>Write a TODO</InputLabel>
-                           
-            <Input value={input} onChange={e => setInput(e.target.value)} />
-                          
-          </FormControl>
-                        
-          <Button
-            type="submit"
-            onClick={addTodo}
-            variant="contained"
-            color="primary"
-            disabled={!input}
-          >
-            Add Todo
-          </Button>
+                  
+          <div id="title">
+              
+            {/*Creates placement for user to type in title  */}
+            <FormControl>
+              <InputLabel>Title</InputLabel>         
+              <Input
+                componentClass="textArea"
+                onChange={e => setTitleIn(e.target.value)}
+              />
+            </FormControl>
+          </div>
+          <div id="note">
+            <FormControl>
+              <InputLabel>Note</InputLabel>
+                             
+              <Input
+                componentClass="textArea"
+                onChange={e => setNoteIn(e.target.value)}
+              />
+                           
+            </FormControl>
+          </div>
+          <div id="button">
+                        
+            <Button
+              type="submit"
+              onClick={addTodo}
+              variant="contained"
+              color="primary"
+              disabled={!titleInput}
+              disabled={!noteInput}
+            >
+              Add Note
+            </Button>
+          </div>
                   
         </form>
-                
+         {/*Creates list of notes interface*/}       
         <ul>
                       
           {todos.map(it => (
