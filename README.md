@@ -14,8 +14,3 @@
   Step 4: In the second terminal cd to the frontend
   
   Step 5: Run the command "npm run start"
-
-
-Test login info:
-  email: emanuelcsuntest@gmail.com
-  pass: Welcome123
